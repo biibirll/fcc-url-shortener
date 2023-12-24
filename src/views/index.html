@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <main>
+        <h1 class="text-center">URL Shortener</h1>
+
+        <p>
+          This project is an URL Shortener designed as a solution to
+          FreeCodeCamp's
+          <a
+            href="https://www.freecodecamp.org/learn/back-end-development-and-apis/#back-end-development-and-apis-projects"
+            >Back End Development and APIs Certification</a
+          >.
+        </p>
+
+        <p>
+          The app includes this interface to make testing easier and the
+          following API endpoints:
+        </p>
+
+        <table class="table">
+          <caption>
+            API endpoints of the URL shortener
+          </caption>
+
+          <thead>
+            <tr>
+              <th>Endpoint</th>
+              <th>URL params</th>
+              <th>Body</th>
+              <th>Status code</th>
+              <th>Response</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>/api/shorturl</td>
+              <td>None</td>
+              <td>{"url": string}</td>
+              <td>200</td>
+              <td>{original_url: string, short_url: string</td>
+              <td>
+                Given a valid URL, checks if <code>url</code> has already been
+                recorded and returns a JSON object containing the original URL
+                in the <code>original_url</code> key and either the recorded
+                string or a new unique string indicating the subdirectory of a
+                short URL in the <code>short_url</code> key.
+              </td>
+            </tr>
+
+            <tr>
+              <td>/api/shorturl</td>
+              <td>None</td>
+              <td>{"url": string}</td>
+              <td>400</td>
+              <td>{"error": "invalid url"}</td>
+              <td>
+                Given a malformed URL, returns a JSON object describing the
+                error.
+              </td>
+            </tr>
+
+            <tr>
+              <td>/api/shorturl/:url</td>
+              <td>
+                <ul>
+                  <li>
+                    <code>url</code>: a short URL that has been mapped to an
+                    original URL
+                  </li>
+                </ul>
+              </td>
+              <td>None</td>
+              <td>302</td>
+              <td>None</td>
+              <td>
+                Given a short URL that has already been mapped to an original
+                URL, redirects the user to the original URL.
+              </td>
+            </tr>
+
+            <tr>
+              <td>/api/shorturl/:url</td>
+              <td>
+                <ul>
+                  <li>
+                    <code>url</code>: a short URL that hasn't been mapped to an
+                    original URL
+                  </li>
+                </ul>
+              </td>
+              <td>None</td>
+              <td>404</td>
+              <td>{"error": "url not found"}</td>
+              <td>
+                Given a short URL that hasn't been mapped to an original URL,
+                returns a JSON object describing that the URL couldn't be found.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="text-center">Shorten your URL</h2>
+
+        <form action="/api/shorturl" method="post">
+          <label for="url">
+            <span>URL: </span>
+            <input type="url" id="url" name="url" />
+          </label>
+
+          <button class="btn btn-success" type="submit">Post</button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
